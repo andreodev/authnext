@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-
+        
         if(!credentials) {
           return null
         }
@@ -27,7 +27,8 @@ export const authOptions: NextAuthOptions = {
           return {
             id: "1",
             name: "Andreuu",
-            email: "andreohenriqueleite@gmail.com"
+            email: "andreohenriqueleite@gmail.com",
+            image: "https://i.pinimg.com/736x/24/dc/68/24dc6839bd60a2b96a45096d9458783a.jpg"
           }
         }
           return null
