@@ -1,4 +1,7 @@
 "use client"
+
+import Image from "next/image";
+
 interface UserProfileProps {
   name: string | null;
   email: string | null;
@@ -11,7 +14,7 @@ export default function UserProfile({ name, email, image }: UserProfileProps) {
       <div className="bg-white p-8 rounded-lg shadow-lg w-full sm:w-96">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Detalhes do Perfil</h2>
         <div className="flex justify-center mb-6">
-          <img
+          <Image
             src={image || "/default-avatar.png"}
             alt="Imagem de perfil"
             className="rounded-full w-24 h-24 object-cover"

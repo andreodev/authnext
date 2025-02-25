@@ -1,10 +1,11 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { prisma } from "@/lib/prisma";
 
-export const authOptions: NextAuthOptions = {
+// Definindo a configuração do NextAuth sem tipagem explícita
+const authOptions = {
   pages: {
     signIn: "/",
   },
@@ -25,7 +26,6 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials) return null;
 
-        
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
@@ -34,7 +34,7 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        // comparar senha
+        // Comparando a senha
         const isValid = await bcrypt.compare(credentials.password, user.password);
         if (!isValid) {
           throw new Error("Senha incorreta!");
@@ -48,14 +48,13 @@ export const authOptions: NextAuthOptions = {
             user.image ||
             "https://i.pinimg.com/736x/24/dc/68/24dc6839bd60a2b96a45096d9458783a.jpg",
         };
-        
       },
-      
     }),
-    
   ],
 };
 
+// Criação do handler do NextAuth sem tipagem explícita
 const handler = NextAuth(authOptions);
 
+// Exportando o handler para as rotas GET e POST
 export { handler as GET, handler as POST };
