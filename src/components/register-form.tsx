@@ -1,6 +1,16 @@
-"use client"
+"use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -43,50 +53,82 @@ export default function Register() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4">Cadastro</h2>
-      {error && <p className="text-red-500">{error}</p>}
-      {success && <p className="text-green-500">{success}</p>}
-      <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
-        <input
-          type="text"
-          name="name"
-          placeholder="Nome"
-          value={formData.name}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="E-mail"
-          value={formData.email}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Senha"
-          value={formData.password}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          required
-        />
-        <input
-          type="text"
-          name="image"
-          placeholder="Link da imagem (opcional)"
-          value={formData.image}
-          onChange={handleChange}
-          className="border p-2 rounded"
-        />
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-          Cadastrar
-        </button>
-      </form>
+    <div className="flex flex-col gap-6">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-2xl">Registre-se</CardTitle>
+          <CardDescription>
+            Digite seus dados para se registrar em minha plataforma!
+          </CardDescription>
+        </CardHeader>
+        {error && <p className="text-red-500">{error}</p>}
+        {success && <p className="text-green-500">{success}</p>}
+        <CardContent>
+          <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
+            <div className="flex flex-col gap-6">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Nome</Label>
+                <Input
+                  type="text"
+                  name="name"
+                  placeholder="Nome"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="border p-2 rounded"
+                  required
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label>Email</Label>
+                <div className="flex items-center">
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="E-mail"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="border p-2 rounded"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="grid gap-2">
+                <Label>Senha</Label>
+                <div className="flex items-center">
+                  <Input
+                    type="password"
+                    name="password"
+                    placeholder="Senha"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="border p-2 rounded"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="grid gap-2">
+                <Label>Endereço da Imagem</Label>
+                <div className="flex items-center">
+                <Input
+                  type="text"
+                  name="image"
+                  placeholder="Link da imagem (opcional)"
+                  value={formData.image}
+                  onChange={handleChange}
+                  className="border p-2 rounded"
+                  />
+              </div>
+                  </div>
+              <Button
+                type="submit"
+                className="bg-blue-500 text-white  rounded"
+              >
+                Cadastrar
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }
