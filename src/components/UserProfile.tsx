@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 interface UserProfileProps {
   name: string | null;
@@ -39,7 +42,7 @@ export default function UserProfile({ name, email, image }: UserProfileProps) {
 
       if (response.ok) {
         alert("Perfil atualizado com sucesso!");
-        setIsEditing(false); 
+        setIsEditing(false);
       } else {
         alert("Erro ao atualizar perfil.");
       }
@@ -50,7 +53,9 @@ export default function UserProfile({ name, email, image }: UserProfileProps) {
   };
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm("Tem certeza que deseja excluir seu perfil?");
+    const confirmDelete = window.confirm(
+      "Tem certeza que deseja excluir seu perfil?"
+    );
     if (!confirmDelete) return;
 
     try {
@@ -64,68 +69,72 @@ export default function UserProfile({ name, email, image }: UserProfileProps) {
 
       if (response.ok) {
         alert("Perfil deletado com sucesso!");
-        window.location.href = "/login"; 
+        window.location.href = "/login";
       } else {
         alert("Erro ao excluir perfil.");
       }
     } catch (error) {
       console.error("Erro:", error);
-      alert("Erro ao excluir o perfil.");
+      alert("Erro ao excluir o perfil. Se você estiver logado com o GitHub, também ocorrerá um erro.");
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-white p-8 rounded-lg shadow-2xl w-full sm:w-96">
-        <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
-          Detalhes do Perfil
-        </h2>
+    <div className="flex items-center justify-center">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-2xl">Perfil de usuário</CardTitle>
+          <CardDescription>
+            Verifique e atualize seus dados! (com exceção do e-mail)
+          </CardDescription>
+        </CardHeader>
         <div className="flex justify-center mb-6">
           <Image
             src={formData.image || "/default-avatar.png"}
             alt="Imagem de perfil"
-            className="rounded-full w-32 h-32 object-cover border-4 border-indigo-500 shadow-xl"
+            className="rounded-full w-32 h-32 object-cover border-4 border-white shadow-xl"
             width={150}
             height={150}
             priority
           />
         </div>
-        <div className="text-center text-gray-700">
+        <div className="text-center ">
           {isEditing ? (
-            <div>
-              <input
+            <div className="text-white">
+              <Input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="border-2 border-gray-300 p-2 mb-4 w-full rounded"
+                className="  p-2 mb-4 w-full rounded text-white"
                 placeholder="Novo nome"
               />
-              <input
+              <Input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="border-2 border-gray-300 p-2 mb-4 w-full rounded"
+                className="p-2 mb-4 w-full rounded text-white"
                 placeholder="Novo e-mail"
                 disabled // Desabilita a edição do email
               />
-              <input
+              <Input
                 type="text"
                 name="image"
                 value={formData.image}
                 onChange={handleChange}
-                className="border-2 border-gray-300 p-2 mb-4 w-full rounded"
+                className=" p-2 mb-4 w-full rounded"
                 placeholder="URL da nova imagem"
               />
             </div>
           ) : (
             <div>
-              <p className="text-lg mb-2 font-medium">
+              <p className="text-lg mb-2 font-medium text-white">
                 <strong>Nome:</strong> {formData.name}
               </p>
-              <p className="text-lg font-medium">
-                <strong>Email:</strong> {formData.email || "Email não disponível"}
+              <p className="text-lg font-medium text-white">
+                <strong>Email:</strong>{" "}
+                {formData.email || "Email não disponível"}
               </p>
             </div>
           )}
@@ -133,37 +142,37 @@ export default function UserProfile({ name, email, image }: UserProfileProps) {
         <div className="mt-6 text-center">
           {isEditing ? (
             <div>
-              <button
-                className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out mr-2"
+              <Button
+                className=" ml-2  py-2 px-4 rounded-lg transition duration-300 ease-in-out mr-2"
                 onClick={handleSave}
               >
                 Salvar Alterações
-              </button>
-              <button
-                className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300 ease-in-out"
-                onClick={() => setIsEditing(false)} 
+              </Button>
+              <Button
+                className=" py-2 px-4 rounded-lg ml-2 ho transition duration-300 ease-in-out"
+                onClick={() => setIsEditing(false)}
               >
                 Cancelar
-              </button>
+              </Button>
             </div>
           ) : (
             <div>
-              <button
-                className="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out"
-                onClick={() => setIsEditing(true)} 
+              <Button
+                className="py-2 px-4 rounded-xl transition-colors  ease-in-out"
+                onClick={() => setIsEditing(true)}
               >
                 Editar Perfil
-              </button>
-              <button
-                className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out mt-4"
-                onClick={handleDelete} 
+              </Button>
+              <Button
+                className=" py-2 px-4 rounded-xl ml-2  transition-colors ease-in-out mt-4"
+                onClick={handleDelete}
               >
                 Excluir Perfil
-              </button>
+              </Button>
             </div>
           )}
         </div>
-      </div>
+      </Card>
     </div>
   );
 }
