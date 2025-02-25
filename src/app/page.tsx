@@ -1,5 +1,4 @@
 import ButtonLogout from "@/components/ui/ButtonLogout";
-import { Card } from "@/components/ui/card";
 import UserProfile from "@/components/UserProfile";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
