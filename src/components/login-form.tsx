@@ -25,7 +25,7 @@ export default function LoginForm({
     };
     signIn("credentials", {
       ...data,
-      callbackUrl: "/profile",
+      callbackUrl: "/",
     });
   }
   return (
@@ -68,7 +68,7 @@ export default function LoginForm({
               <Button
                 variant="outline"
                 className="w-full"
-                onClick={() => signIn("github", { callbackUrl: "/profile" })}
+                onClick={() => signIn("github", { callbackUrl: "/" })}
               >
                 Login with Github
               </Button>
