@@ -18,6 +18,8 @@ export default function UserProfile({ name, email, image }: UserProfileProps) {
             src={image || "/default-avatar.png"}
             alt="Imagem de perfil"
             className="rounded-full w-24 h-24 object-cover"
+            width={150}
+            height={150}
           />
         </div>
         <div className="text-center text-gray-700">
