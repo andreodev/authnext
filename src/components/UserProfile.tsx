@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { handleDelete } from "./hooks/useFetch";
 
 interface UserProfileProps {
   name: string | null;
@@ -15,7 +16,7 @@ interface UserProfileProps {
 export default function UserProfile({ name, email, image }: UserProfileProps) {
   const [isEditing, setIsEditing] = useState(false);
 
-  // Estado para armazenar os dados editados
+
   const [formData, setFormData] = useState({
     name: name || "",
     email: email || "",
@@ -52,32 +53,7 @@ export default function UserProfile({ name, email, image }: UserProfileProps) {
     }
   };
 
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "Tem certeza que deseja excluir seu perfil?"
-    );
-    if (!confirmDelete) return;
-
-    try {
-      const response = await fetch("/api/user/delete", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: formData.email }),
-      });
-
-      if (response.ok) {
-        alert("Perfil deletado com sucesso!");
-        window.location.href = "/login";
-      } else {
-        alert("Erro ao excluir perfil.");
-      }
-    } catch (error) {
-      console.error("Erro:", error);
-      alert("Erro ao excluir o perfil. Se você estiver logado com o GitHub, também ocorrerá um erro.");
-    }
-  };
+  
 
   return (
     <div className="flex items-center justify-center">
@@ -158,14 +134,14 @@ export default function UserProfile({ name, email, image }: UserProfileProps) {
           ) : (
             <div>
               <Button
-                className="py-2 px-4 rounded-xl transition-colors  ease-in-out"
+                className="py-2 px-4 rounded-xl transition-colors mb-2  ease-in-out"
                 onClick={() => setIsEditing(true)}
               >
                 Editar Perfil
               </Button>
               <Button
                 className=" py-2 px-4 rounded-xl ml-2  transition-colors ease-in-out mt-4"
-                onClick={handleDelete}
+                onClick={() => handleDelete({ email: formData.email })}
               >
                 Excluir Perfil
               </Button>

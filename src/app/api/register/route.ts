@@ -20,7 +20,7 @@ export async function POST(req: Request) {
         name: body.name,
         email: body.email,
         password: hashedPassword,
-        image: body.image || "https://via.placeholder.com/150",
+        image: body.image || "https://i.pinimg.com/736x/7f/e4/25/7fe425baaa808391cd7e24f091a9967b.jpg",
       },
     });
 

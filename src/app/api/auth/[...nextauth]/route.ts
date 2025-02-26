@@ -4,7 +4,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { prisma } from "@/lib/prisma";
 
-// Definindo a configuração do NextAuth sem tipagem explícita
 const authOptions = {
   pages: {
     signIn: "/",
@@ -30,8 +29,7 @@ const authOptions = {
           where: { email: credentials.email },
         });
         if (!user) {
-          console.log("Usuário não encontrado!");
-          return null;
+          throw new Error("Usuário não encontrado!");
         }
 
         // Comparando a senha
@@ -46,7 +44,7 @@ const authOptions = {
           email: user.email,
           image:
             user.image ||
-            "https://i.pinimg.com/736x/24/dc/68/24dc6839bd60a2b96a45096d9458783a.jpg",
+            "https://i.pinimg.com/736x/7f/e4/25/7fe425baaa808391cd7e24f091a9967b.jpg",
         };
       },
     }),
