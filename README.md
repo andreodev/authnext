@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# User Management System
 
-## Getting Started
+Este é um sistema full-stack para gerenciamento de usuários, desenvolvido com Next.js, React, MongoDB e Prisma. O aplicativo permite o registro, autenticação e visualização do perfil do usuário de forma segura e eficiente.
 
-First, run the development server:
+## 🚀 Tecnologias Utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js** - Framework para React, permitindo renderização no lado do servidor (SSR) e geração estática.
+- **React** - Biblioteca para criação de interfaces dinâmicas e responsivas.
+- **MongoDB** - Banco de dados NoSQL para armazenamento flexível e escalável dos dados.
+- **Prisma** - ORM para interação eficiente com o banco de dados.
+- **JWT (JSON Web Token)** - Implementado para garantir autenticação segura.
+
+## 📌 Funcionalidades
+
+- Registro de usuários.
+- Autenticação segura via JWT.
+- Visualização e edição de perfil do usuário.
+- Interface responsiva e moderna.
+
+## 📦 Como Executar o Projeto
+
+### 1. Clone o repositório
+```sh
+ git clone https://github.com/seu-usuario/seu-repositorio.git
+ cd seu-repositorio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Instale as dependências
+```sh
+npm install
+# ou
+yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Configure as variáveis de ambiente
+Crie um arquivo `.env` na raiz do projeto e adicione as seguintes variáveis:
+```env
+DATABASE_URL=mongodb+srv://seu_usuario:senha@cluster.mongodb.net/seu_banco
+JWT_SECRET=sua_chave_secreta
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Rode as migrações do Prisma
+```sh
+npx prisma migrate dev
+```
 
-## Learn More
+### 5. Inicie o servidor
+```sh
+npm run dev
+# ou
+yarn dev
+```
+O servidor estará rodando em `http://localhost:3000`.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠 Estrutura do Projeto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+/project-root
+├── prisma/         # Configuração do Prisma e esquemas do banco de dados
+├── pages/          # Páginas do Next.js
+├── components/     # Componentes reutilizáveis do React
+├── services/       # Serviços para autenticação e interação com API
+├── styles/        # Arquivos de estilos
+├── .env           # Arquivo de variáveis de ambiente
+└── README.md
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🤝 Contribuição
+Sinta-se à vontade para contribuir! Faça um fork do repositório, crie uma branch e envie um PR.
 
-## Deploy on Vercel
+## 📄 Licença
+Este projeto está sob a licença MIT. Para mais detalhes, consulte o arquivo `LICENSE`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
+Desenvolvido por **Andreo Henrique** 🚀
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
